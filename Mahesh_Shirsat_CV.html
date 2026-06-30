@@ -1,0 +1,1138 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#0C0D14" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#FAF8F4" media="(prefers-color-scheme: light)">
+<meta name="description" content="Mahesh Shirsat – Senior Data Analyst, Private Markets & M&A Intelligence at PitchBook · Morningstar, Mumbai.">
+<title>Mahesh Shirsat – Financial Research</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ═══════════ TOKENS – DARK ═══════════ */
+[data-theme="dark"] {
+  --bg:      #0C0D14;
+  --bg2:     #101120;
+  --panel:   #14162A;
+  --card:    #1B1E36;
+  --acc:     #B8AAFF;
+  --acc2:    #D4CCFF;
+  --gold:    #E8C97A;
+  --bdr:     rgba(184,170,255,0.10);
+  --bdr2:    rgba(184,170,255,0.20);
+  --t1:      #F0EEF8;
+  --t2:      rgba(240,238,248,0.62);
+  --t3:      rgba(240,238,248,0.34);
+  --nav-bg:  rgba(12,13,20,0.90);
+  --sb:      #B8AAFF;
+  --hero-glow1: rgba(184,170,255,0.09);
+  --hero-glow2: rgba(232,201,122,0.05);
+}
+/* ═══════════ TOKENS – LIGHT ═══════════ */
+[data-theme="light"] {
+  --bg:      #FAF8F4;
+  --bg2:     #F0EDE5;
+  --panel:   #FFFFFF;
+  --card:    #F5F2EB;
+  --acc:     #3D2F8A;
+  --acc2:    #5A4BA0;
+  --gold:    #7A5010;
+  --bdr:     rgba(61,47,138,0.11);
+  --bdr2:    rgba(61,47,138,0.22);
+  --t1:      #0D0B14;
+  --t2:      rgba(13,11,20,0.72);
+  --t3:      rgba(13,11,20,0.46);
+  --nav-bg:  rgba(250,248,244,0.92);
+  --sb:      #3D2F8A;
+  --hero-glow1: transparent;
+  --hero-glow2: transparent;
+}
+
+/* ═══════════ RESET ═══════════ */
+*,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
+html { scroll-behavior:smooth; }
+body {
+  font-family:'DM Sans',system-ui,sans-serif;
+  background:var(--bg); color:var(--t1);
+  line-height:1.72; overflow-x:hidden;
+  transition:background .35s,color .35s;
+}
+::-webkit-scrollbar { width:3px; }
+::-webkit-scrollbar-track { background:var(--bg); }
+::-webkit-scrollbar-thumb { background:var(--sb); border-radius:2px; }
+a { color:inherit; text-decoration:none; }
+
+/* ═══════════ NAV ═══════════ */
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:300;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:0 5%; height:64px;
+  background:var(--nav-bg);
+  backdrop-filter:blur(24px);
+  border-bottom:1px solid var(--bdr);
+  transition:background .35s,border-color .35s;
+}
+.nav-name {
+  font-family:'Libre Baskerville',serif;
+  font-size:1.08rem; font-weight:700;
+  color:var(--t1); letter-spacing:.01em; transition:color .3s;
+}
+.nav-links { display:flex; gap:2.2rem; list-style:none; }
+.nav-links a {
+  font-size:.74rem; font-weight:500;
+  color:var(--t3); letter-spacing:.13em; text-transform:uppercase;
+  transition:color .2s;
+}
+.nav-links a:hover { color:var(--t1); }
+.nav-right { display:flex; align-items:center; gap:.8rem; }
+
+/* toggle */
+.toggle-wrap {
+  display:flex; align-items:center; gap:.5rem;
+  font-family:'DM Mono',monospace; font-size:.62rem;
+  color:var(--t3); letter-spacing:.1em; text-transform:uppercase;
+}
+.theme-btn {
+  width:44px; height:24px; border-radius:12px;
+  background:var(--bdr2); border:1px solid var(--bdr2);
+  cursor:pointer; position:relative;
+  transition:background .3s,border-color .3s; flex-shrink:0;
+  -webkit-tap-highlight-color:transparent;
+}
+.theme-btn::after {
+  content:''; position:absolute; top:3px; left:3px;
+  width:16px; height:16px; border-radius:50%;
+  background:var(--acc); transition:transform .3s,background .3s;
+}
+[data-theme="light"] .theme-btn::after { transform:translateX(20px); }
+
+/* hamburger */
+.hamburger {
+  display:none; flex-direction:column; justify-content:center; gap:5px;
+  width:36px; height:36px; cursor:pointer;
+  background:none; border:none; padding:4px;
+  -webkit-tap-highlight-color:transparent;
+}
+.hamburger span {
+  display:block; width:22px; height:1.5px;
+  background:var(--t2); border-radius:2px;
+  transition:all .3s;
+}
+.hamburger.open span:nth-child(1) { transform:translateY(6.5px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity:0; }
+.hamburger.open span:nth-child(3) { transform:translateY(-6.5px) rotate(-45deg); }
+
+/* mobile menu */
+.mobile-menu {
+  display:none; position:fixed; top:64px; left:0; right:0; z-index:250;
+  background:var(--nav-bg); backdrop-filter:blur(24px);
+  border-bottom:1px solid var(--bdr);
+  flex-direction:column; transition:background .35s;
+}
+.mobile-menu.open { display:flex; }
+.mobile-menu a {
+  font-size:.82rem; font-weight:500;
+  color:var(--t2); letter-spacing:.1em; text-transform:uppercase;
+  padding:.9rem 5%; border-bottom:1px solid var(--bdr);
+  transition:color .2s,background .2s;
+  -webkit-tap-highlight-color:transparent;
+}
+.mobile-menu a:last-child { border-bottom:none; }
+.mobile-menu a:active { background:var(--bdr); color:var(--t1); }
+
+/* ═══════════ HERO ═══════════ */
+.hero {
+  min-height:100vh; display:flex; align-items:center;
+  padding:0 5%; position:relative; overflow:hidden;
+}
+.hero::before {
+  content:''; position:absolute; top:-20%; right:-10%;
+  width:700px; height:700px;
+  background:radial-gradient(circle,var(--hero-glow1) 0%,transparent 65%);
+  pointer-events:none;
+}
+.hero::after {
+  content:''; position:absolute; bottom:-20%; left:-5%;
+  width:500px; height:500px;
+  background:radial-gradient(circle,var(--hero-glow2) 0%,transparent 65%);
+  pointer-events:none;
+}
+.hero-inner { max-width:1100px; margin:0 auto; width:100%; padding-top:4rem; padding-bottom:3rem; }
+.hero-eyebrow {
+  font-family:'DM Mono',monospace; font-size:.7rem;
+  color:var(--acc); letter-spacing:.2em; text-transform:uppercase;
+  margin-bottom:1.6rem;
+  display:flex; align-items:center; gap:.8rem;
+  transition:color .3s;
+}
+.hero-eyebrow::before {
+  content:''; width:30px; height:1px; background:var(--acc);
+  display:inline-block; transition:background .3s;
+}
+.hero-h1 {
+  font-family:'Libre Baskerville',serif;
+  font-size:clamp(3.2rem,6.5vw,7rem);
+  font-weight:700; color:var(--t1);
+  line-height:1.06; letter-spacing:-.02em;
+  margin-bottom:1.4rem; transition:color .3s;
+}
+.hero-tagline {
+  font-size:1rem; font-weight:300; color:var(--t2);
+  max-width:580px; line-height:1.85;
+  border-left:2px solid var(--acc); padding-left:1.2rem;
+  margin-bottom:2.8rem; transition:color .3s,border-color .3s;
+}
+/* hero contact row */
+.hero-contact {
+  display:flex; flex-wrap:wrap; gap:.6rem 2rem;
+  font-family:'DM Mono',monospace; font-size:.67rem;
+  color:var(--t3); letter-spacing:.06em;
+  margin-bottom:3rem; transition:color .3s;
+}
+.hero-contact a { color:var(--acc); transition:color .3s; }
+.hero-contact a:hover { color:var(--acc2); }
+
+/* stats grid */
+.stats-grid {
+  display:grid; grid-template-columns:repeat(3,1fr);
+  gap:1px; background:var(--bdr);
+  border:1px solid var(--bdr); border-radius:8px; overflow:hidden;
+  max-width:700px;
+}
+.stat-box {
+  background:var(--panel); padding:1.8rem 1.6rem;
+  transition:background .2s;
+}
+.stat-box:hover { background:var(--card); }
+.stat-num {
+  font-family:'Libre Baskerville',serif;
+  font-size:2.2rem; font-weight:700;
+  color:var(--t1); line-height:1; margin-bottom:.35rem;
+  transition:color .3s;
+}
+.stat-num sup { font-size:1.1rem; color:var(--acc); }
+.stat-label {
+  font-family:'DM Mono',monospace; font-size:.6rem;
+  color:var(--t3); letter-spacing:.13em; text-transform:uppercase;
+}
+
+/* ═══════════ SECTIONS ═══════════ */
+.section { padding:6rem 5%; }
+.s-inner { max-width:1100px; margin:0 auto; }
+.s-num {
+  font-family:'DM Mono',monospace; font-size:.62rem;
+  color:var(--acc); letter-spacing:.2em; text-transform:uppercase;
+  margin-bottom:.6rem; display:flex; align-items:center; gap:.7rem;
+  transition:color .3s;
+}
+.s-num::after { content:''; width:36px; height:1px; background:var(--acc); opacity:.45; }
+.s-h2 {
+  font-family:'Libre Baskerville',serif;
+  font-size:clamp(1.8rem,3vw,2.8rem); font-weight:700;
+  color:var(--t1); line-height:1.1; letter-spacing:-.015em;
+  margin-bottom:3rem; transition:color .3s;
+}
+.s-h2 em { font-weight:400; font-style:italic; color:var(--t2); }
+
+/* ═══════════ PROFILE ═══════════ */
+.profile { background:var(--bg2); transition:background .35s; }
+.profile-grid { display:grid; grid-template-columns:1.55fr 1fr; gap:5rem; align-items:start; }
+.profile-body { font-size:.97rem; color:var(--t2); line-height:1.95; }
+.profile-body p { margin-bottom:1.2rem; }
+.hl { color:var(--t1); font-weight:500; }
+.hl-a { color:var(--acc); font-weight:500; transition:color .3s; }
+.info-row {
+  display:flex; flex-direction:column; gap:.2rem;
+  padding:.85rem 0; border-bottom:1px solid var(--bdr);
+  transition:border-color .3s;
+}
+.info-row:first-child { padding-top:0; }
+.info-key {
+  font-family:'DM Mono',monospace; font-size:.58rem;
+  color:var(--t3); letter-spacing:.16em; text-transform:uppercase;
+}
+.info-val { font-size:.88rem; color:var(--t1); transition:color .3s; }
+.cfa-pill {
+  display:inline-flex; align-items:center; gap:.5rem;
+  border:1px solid var(--bdr2); border-radius:3px;
+  padding:.65rem 1rem; margin-top:1.4rem;
+  font-family:'DM Mono',monospace; font-size:.63rem;
+  color:var(--acc); letter-spacing:.06em; transition:all .3s;
+}
+
+/* ═══════════ EXPERIENCE ═══════════ */
+.experience { background:var(--bg); transition:background .35s; }
+.exp-card {
+  display:grid; grid-template-columns:210px 1fr;
+  gap:3rem; padding:3rem 0 3rem 1.2rem;
+  border-top:1px solid var(--bdr);
+  position:relative; transition:border-color .3s;
+}
+.exp-card:last-child { border-bottom:1px solid var(--bdr); }
+.exp-card::before {
+  content:''; position:absolute; left:0; top:0;
+  width:2px; height:0; background:var(--acc);
+  transition:height .5s ease;
+}
+.exp-card:hover::before { height:100%; }
+.exp-date {
+  font-family:'DM Mono',monospace; font-size:.63rem;
+  color:var(--t3); letter-spacing:.07em; line-height:1.8;
+  margin-bottom:.6rem; transition:color .3s;
+}
+.exp-co {
+  font-size:.71rem; font-weight:600;
+  color:var(--acc); text-transform:uppercase; letter-spacing:.1em;
+  transition:color .3s;
+}
+.exp-loc { font-size:.71rem; color:var(--t3); margin-top:.2rem; }
+.exp-title {
+  font-family:'Libre Baskerville',serif;
+  font-size:1.5rem; font-weight:700;
+  color:var(--t1); margin-bottom:.3rem; line-height:1.1;
+  transition:color .3s;
+}
+.exp-subrole {
+  font-size:.79rem; font-style:italic;
+  color:var(--t3); margin-bottom:1.3rem; transition:color .3s;
+}
+.exp-list { list-style:none; }
+.exp-list li {
+  position:relative; padding-left:1.4rem;
+  font-size:.91rem; color:var(--t2);
+  margin-bottom:.6rem; line-height:1.75; transition:color .3s;
+}
+.exp-list li::before {
+  content:''; position:absolute; left:0; top:.72em;
+  width:5px; height:1px; background:var(--acc);
+}
+.exp-divider {
+  font-family:'DM Mono',monospace; font-size:.57rem;
+  color:var(--gold); letter-spacing:.17em; text-transform:uppercase;
+  margin:1.6rem 0 1rem;
+  display:flex; align-items:center; gap:.7rem;
+  transition:color .3s;
+}
+.exp-divider::after { content:''; width:28px; height:1px; background:var(--gold); opacity:.4; }
+
+/* ═══════════ PROJECTS ═══════════ */
+.projects { background:var(--bg2); transition:background .35s; }
+.proj-grid {
+  display:grid; grid-template-columns:repeat(3,1fr);
+  gap:1px; background:var(--bdr);
+  border:1px solid var(--bdr); border-radius:8px; overflow:hidden;
+}
+.proj-card {
+  background:var(--panel); padding:2.2rem 2rem;
+  position:relative; overflow:hidden; transition:background .25s;
+}
+.proj-card:hover { background:var(--card); }
+.proj-card::after {
+  content:''; position:absolute; bottom:0; left:0; right:0;
+  height:1px; background:var(--acc);
+  transform:scaleX(0); transform-origin:left;
+  transition:transform .4s ease;
+}
+.proj-card:hover::after { transform:scaleX(1); }
+.proj-num {
+  font-family:'DM Mono',monospace; font-size:.58rem;
+  color:var(--t3); letter-spacing:.1em; margin-bottom:1.2rem;
+}
+.proj-title {
+  font-family:'Libre Baskerville',serif;
+  font-size:1.05rem; font-weight:700;
+  color:var(--t1); margin-bottom:.75rem; line-height:1.2;
+  transition:color .3s;
+}
+.proj-tag-row { display:flex; flex-wrap:wrap; gap:.4rem; margin-bottom:.8rem; }
+.proj-tag {
+  font-family:'DM Mono',monospace; font-size:.55rem;
+  color:var(--acc); border:1px solid var(--bdr2);
+  padding:.18rem .6rem; border-radius:2px;
+  letter-spacing:.07em; text-transform:uppercase;
+  transition:color .3s,border-color .3s;
+}
+.proj-body { font-size:.85rem; color:var(--t2); line-height:1.8; transition:color .3s; }
+
+/* ═══════════ COVERAGE STATS ═══════════ */
+.coverage { background:var(--bg); transition:background .35s; }
+.cov-stats {
+  display:grid; grid-template-columns:repeat(3,1fr);
+  gap:1px; background:var(--bdr);
+  border:1px solid var(--bdr); border-radius:8px; overflow:hidden;
+  margin-bottom:3rem;
+}
+.cov-box {
+  background:var(--panel); padding:2.5rem 2rem;
+  text-align:center; transition:background .2s;
+}
+.cov-box:hover { background:var(--card); }
+.cov-num {
+  font-family:'Libre Baskerville',serif;
+  font-size:3rem; font-weight:700;
+  color:var(--t1); line-height:1; margin-bottom:.5rem;
+  transition:color .3s;
+}
+.cov-num sup { font-size:1.4rem; color:var(--acc); vertical-align:super; }
+.cov-label {
+  font-family:'DM Mono',monospace; font-size:.62rem;
+  color:var(--t3); letter-spacing:.14em; text-transform:uppercase;
+}
+/* world map container */
+.map-section {
+  border:1px solid var(--bdr); border-radius:8px;
+  overflow:hidden; background:var(--panel);
+}
+.map-top {
+  display:grid; grid-template-columns:repeat(4,1fr);
+  border-bottom:1px solid var(--bdr);
+}
+.map-stat {
+  padding:1.6rem 1rem; text-align:center;
+  border-right:1px solid var(--bdr);
+}
+.map-stat:last-child { border-right:none; }
+.map-stat-num {
+  font-family:'Libre Baskerville',serif;
+  font-size:1.7rem; font-weight:700; color:var(--t1);
+  transition:color .3s;
+}
+.map-stat-num sup { font-size:.9rem; color:var(--acc); }
+.map-stat-label {
+  font-family:'DM Mono',monospace; font-size:.56rem;
+  color:var(--t3); letter-spacing:.12em; text-transform:uppercase;
+  margin-top:.3rem;
+}
+.map-svg-wrap {
+  width:100%; line-height:0;
+  background:var(--bg2);
+}
+.map-svg-wrap svg { width:100%; height:auto; display:block; }
+.map-dot {
+  fill:var(--gold); stroke:var(--bg2); stroke-width:2;
+}
+.map-dot-pulse {
+  fill:var(--gold); opacity:.25;
+}
+.markets-footer {
+  display:flex; flex-wrap:wrap; gap:.4rem 1.6rem;
+  padding:1.4rem 1.8rem;
+  border-top:1px solid var(--bdr);
+}
+.market-item {
+  display:flex; align-items:center; gap:.5rem;
+  font-family:'DM Mono',monospace; font-size:.66rem;
+  color:var(--t2); letter-spacing:.05em;
+  transition:color .3s;
+}
+.market-item::before {
+  content:''; width:6px; height:6px; border-radius:50%;
+  background:var(--gold); flex-shrink:0;
+}
+
+/* ═══════════ SKILLS ═══════════ */
+.skills { background:var(--bg2); transition:background .35s; }
+.skills-grid {
+  display:grid; grid-template-columns:repeat(3,1fr);
+  gap:1px; background:var(--bdr);
+  border:1px solid var(--bdr); border-radius:8px; overflow:hidden;
+}
+.sg { background:var(--panel); padding:2rem 1.8rem; transition:background .2s; }
+.sg:hover { background:var(--card); }
+.sg-label {
+  font-family:'DM Mono',monospace; font-size:.57rem;
+  color:var(--acc); letter-spacing:.18em; text-transform:uppercase;
+  margin-bottom:1.1rem; padding-bottom:.75rem;
+  border-bottom:1px solid var(--bdr); transition:color .3s,border-color .3s;
+}
+.tags { display:flex; flex-wrap:wrap; gap:.45rem; }
+.tag {
+  background:transparent; border:1px solid var(--bdr2);
+  color:var(--t2); font-size:.78rem;
+  padding:.28rem .75rem; border-radius:2px;
+  transition:all .15s;
+}
+.tag:hover { background:var(--card); border-color:var(--acc); color:var(--acc); }
+
+/* ═══════════ CERTIFICATIONS ═══════════ */
+.certifications { background:var(--bg); transition:background .35s; }
+.cert-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:.9rem; }
+.cert-card {
+  border:1px solid var(--bdr); border-radius:6px;
+  padding:1.2rem 1.5rem; display:flex; align-items:center; gap:1rem;
+  background:var(--panel); transition:all .2s;
+}
+.cert-card:hover { border-color:var(--bdr2); background:var(--card); }
+.cert-ico {
+  width:36px; height:36px; border-radius:3px; flex-shrink:0;
+  border:1px solid var(--bdr2);
+  display:flex; align-items:center; justify-content:center;
+  font-family:'DM Mono',monospace; font-size:.55rem;
+  color:var(--acc); font-weight:500; transition:all .3s;
+}
+.cert-nm { font-size:.86rem; color:var(--t1); line-height:1.4; transition:color .3s; }
+
+/* ═══════════ EDUCATION ═══════════ */
+.education { background:var(--bg2); transition:background .35s; }
+.edu-list {
+  display:flex; flex-direction:column; gap:1px;
+  background:var(--bdr); border:1px solid var(--bdr);
+  border-radius:8px; overflow:hidden;
+}
+.edu-row {
+  background:var(--panel);
+  display:grid; grid-template-columns:150px 1fr;
+  gap:2rem; padding:1.7rem 2rem; align-items:center;
+  transition:background .2s;
+}
+.edu-row:hover { background:var(--card); }
+.edu-yr {
+  font-family:'DM Mono',monospace; font-size:.63rem;
+  color:var(--t3); letter-spacing:.07em; transition:color .3s;
+}
+.edu-deg { font-size:.92rem; font-weight:500; color:var(--t1); margin-bottom:.2rem; transition:color .3s; }
+.edu-sch { font-size:.8rem; color:var(--t3); transition:color .3s; }
+
+/* ═══════════ CONTACT ═══════════ */
+.contact { background:var(--bg); padding:6rem 5%; transition:background .35s; }
+.contact-inner { max-width:1100px; margin:0 auto; }
+.contact-grid { display:grid; grid-template-columns:1fr 1fr; gap:5rem; margin-top:2.5rem; align-items:center; }
+.contact-big {
+  font-family:'Libre Baskerville',serif;
+  font-size:clamp(1.7rem,3vw,2.6rem); font-weight:700;
+  color:var(--t1); line-height:1.18; margin-bottom:1rem; transition:color .3s;
+}
+.contact-big em { font-weight:400; font-style:italic; color:var(--acc); }
+.contact-p { font-size:.93rem; color:var(--t2); line-height:1.85; transition:color .3s; }
+.clinks { display:flex; flex-direction:column; gap:.85rem; }
+.clink {
+  display:flex; align-items:center; gap:1rem;
+  padding:1.1rem 1.4rem; border:1px solid var(--bdr); border-radius:5px;
+  color:var(--t2); background:var(--panel); transition:all .22s;
+}
+.clink:hover { border-color:var(--bdr2); color:var(--t1); background:var(--card); }
+.clink-ico {
+  width:32px; height:32px; border-radius:3px; flex-shrink:0;
+  border:1px solid var(--bdr2);
+  display:flex; align-items:center; justify-content:center;
+  font-size:.85rem; transition:border-color .3s;
+}
+.clink-lbl {
+  font-family:'DM Mono',monospace; font-size:.55rem;
+  color:var(--t3); letter-spacing:.12em; text-transform:uppercase; display:block;
+}
+.clink-val { font-size:.86rem; color:var(--t1); transition:color .3s; }
+
+/* ═══════════ FOOTER ═══════════ */
+footer {
+  background:var(--bg); border-top:1px solid var(--bdr);
+  padding:1.8rem 5%; display:flex; align-items:center; justify-content:space-between;
+  transition:background .35s,border-color .3s;
+}
+.f-l,.f-r {
+  font-family:'DM Mono',monospace; font-size:.63rem;
+  color:var(--t3); letter-spacing:.07em; transition:color .3s;
+}
+
+/* ═══════════ REVEAL ═══════════ */
+.reveal { opacity:0; transform:translateY(22px); transition:opacity .6s ease,transform .6s ease; }
+.reveal.in { opacity:1; transform:none; }
+
+/* ═══════════ RESPONSIVE ═══════════ */
+@media(max-width:900px) {
+  nav { padding:0 4%; }
+  .nav-links { display:none; }
+  .nav-name { font-size:.92rem; }
+  .hamburger { display:flex; }
+  .hero { padding:7rem 4% 4rem; min-height:auto; }
+  .section { padding:4rem 4%; }
+  .profile-grid,.exp-card,.contact-grid { grid-template-columns:1fr; gap:2rem; }
+  .proj-grid,.skills-grid,.cov-stats,.cert-grid { grid-template-columns:1fr; }
+  .map-top { grid-template-columns:repeat(2,1fr); }
+  .map-stat { padding:1.2rem .8rem; }
+  .map-stat-num { font-size:1.3rem; }
+  .markets-footer { padding:1.2rem 1.2rem; gap:.4rem 1rem; }
+  .edu-row { grid-template-columns:1fr; gap:.4rem; }
+  .stats-grid { grid-template-columns:repeat(2,1fr); max-width:100%; }
+  .hero-h1 { font-size:clamp(2.6rem,10vw,3.5rem); }
+  .hero-tagline { font-size:.93rem; }
+  .theme-btn { width:48px; height:28px; }
+  .theme-btn::after { width:20px; height:20px; top:3px; left:3px; }
+  [data-theme="light"] .theme-btn::after { transform:translateX(20px); }
+  .exp-card { padding:2rem 0 2rem .8rem; }
+  .cov-num { font-size:2.2rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <span class="nav-name">Mahesh Shirsat</span>
+  <ul class="nav-links">
+    <li><a href="#profile">Profile</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#coverage">Coverage</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#education">Education</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="hamburger" id="hamburger" aria-label="Open menu" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="toggle-wrap">
+      <span id="toggleLabel">Dark</span>
+      <button class="theme-btn" id="themeBtn" aria-label="Toggle theme" onclick="toggleTheme()"></button>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#profile" onclick="closeMenu()">Profile</a>
+  <a href="#experience" onclick="closeMenu()">Experience</a>
+  <a href="#projects" onclick="closeMenu()">Projects</a>
+  <a href="#coverage" onclick="closeMenu()">Coverage</a>
+  <a href="#skills" onclick="closeMenu()">Skills</a>
+  <a href="#education" onclick="closeMenu()">Education</a>
+</div>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero" id="top">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Financial Research · Private Markets · M&amp;A Intelligence</div>
+    <h1 class="hero-h1">Mahesh Shirsat</h1>
+    <p class="hero-tagline">Senior Data Analyst &amp; People Management, PitchBook · Morningstar. 5+ years in private market research, VC intelligence, and M&amp;A data. CFA Level II Candidate based in Mumbai.</p>
+    <div class="hero-contact">
+      <span>Ghatkopar, Mumbai — 400075</span>
+      <span>+91 89767 62727</span>
+      <a href="mailto:mahesh.shirsath27@gmail.com">mahesh.shirsath27@gmail.com</a>
+      <a href="https://linkedin.com/in/mahesh-shirsat-2b7571227" target="_blank" rel="noopener noreferrer">linkedin.com/in/mahesh-shirsat-2b7571227</a>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-box">
+        <div class="stat-num">1,500<sup>+</sup></div>
+        <div class="stat-label">New Company Profiles</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">2,100<sup>+</sup></div>
+        <div class="stat-label">Close Loop Profiles</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">1,350<sup>+</sup></div>
+        <div class="stat-label">New Rounds Tracked</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">5<sup>+</sup></div>
+        <div class="stat-label">Years Experience</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">3</div>
+        <div class="stat-label">Key Projects</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">6–8</div>
+        <div class="stat-label">People Management</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 01 PROFILE ═══ -->
+<section class="profile section" id="profile">
+  <div class="s-inner">
+    <div class="s-num reveal">01 Profile</div>
+    <div class="profile-grid">
+      <div class="profile-body reveal">
+        <p>Senior Data Analyst and team leader with <span class="hl">over five years of experience</span> at <span class="hl-a">PitchBook Data, Morningstar Incorporated</span>. Deep expertise in private markets intelligence, venture capital research, and M&amp;A data ecosystems. Specialised in tracking funding activity, deal structures, ownership data, and valuation metrics across venture-backed and M&amp;A-active companies globally.</p>
+        <p>Proven track record sourcing proprietary investment insights directly from <span class="hl">founders, C-suite executives, VC firms, institutional investors, and limited partners</span>. Strong foundation in research operations, financial data quality assurance, methodology compliance, and cross-functional stakeholder collaboration.</p>
+        <p>Experienced in <span class="hl">people management</span>, directly overseeing a team of 6–8 research analysts — managing onboarding, setting performance expectations, conducting feedback sessions, and designing knowledge-transfer frameworks. I act as the primary escalation point during high-volume periods, resolving workflow bottlenecks and fostering a culture of peer learning and cross-team collaboration.</p>
+        <p>Currently preparing for the <span class="hl-a">CFA Level II examination</span>, having cleared Level I, with a strong foundation in financial modelling, valuation, and investment analysis.</p>
+      </div>
+      <div class="reveal">
+        <div class="info-row">
+          <span class="info-key">Location</span>
+          <span class="info-val">Ghatkopar, Mumbai — 400075</span>
+        </div>
+        <div class="info-row">
+          <span class="info-key">Current Role</span>
+          <span class="info-val">Senior Data Analyst · PitchBook · Morningstar</span>
+        </div>
+        <div class="info-row">
+          <span class="info-key">Specialisation</span>
+          <span class="info-val">VC Intelligence · M&amp;A Research · Private Markets · Private Market Data Collection · Alternative Investments · Data Aggregation</span>
+        </div>
+        <div class="info-row">
+          <span class="info-key">People Management</span>
+          <span class="info-val">6–8 Research Analysts · Onboarding · Mentoring · Performance Reviews</span>
+        </div>
+        <div class="info-row">
+          <span class="info-key">Phone</span>
+          <span class="info-val">+91 89767 62727</span>
+        </div>
+        <div class="info-row">
+          <span class="info-key">Email</span>
+          <span class="info-val">mahesh.shirsath27@gmail.com</span>
+        </div>
+        <div class="info-row">
+          <span class="info-key">Languages</span>
+          <span class="info-val">English · Hindi · Marathi · Gujarati (Basic)</span>
+        </div>
+        <div class="cfa-pill">★ &nbsp;CFA Level I Cleared — Level II Candidate</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 02 EXPERIENCE ═══ -->
+<section class="experience section" id="experience">
+  <div class="s-inner">
+    <div class="s-num reveal">02 Experience</div>
+
+    <div class="exp-card reveal">
+      <div>
+        <div class="exp-date">July 2023 — Present</div>
+        <div class="exp-co">PitchBook · Morningstar</div>
+        <div class="exp-loc">Navi Mumbai, India</div>
+      </div>
+      <div>
+        <h3 class="exp-title">Senior Data Analyst</h3>
+        <p class="exp-subrole">Research Lead &amp; Team Mentor — VC &amp; M&amp;A Private Markets</p>
+        <ul class="exp-list">
+          <li>Serve as the research lead for global VC and M&amp;A coverage, overseeing data accuracy, methodology compliance, and timely delivery of client-ready reports across multiple markets and asset classes.</li>
+          <li>Own end-to-end tracking of investment activity including funding rounds, corporate actions, valuations, and deal structures to maintain real-time accuracy on the PitchBook platform.</li>
+          <li>Engage directly with company founders, C-suite executives, and institutional investors as primary sources, ensuring the highest standard of data integrity and depth of insight.</li>
+          <li>Collaborate closely with client-facing teams to understand data requirements, resolve complex queries, and deliver structured intelligence that supports investment decision-making.</li>
+          <li>Built 1,500+ new company profiles under the VC and M&amp;A verticals, sourcing and structuring investment data across funding stages, ownership structures, and management details.</li>
+          <li>Scrubbed, validated, and edited 2,100+ company profiles, ensuring data accuracy, completeness, and compliance with PitchBook collection standards.</li>
+          <li>Tracked and updated new funding rounds across 1,350+ companies, monitoring deal activity, investor participation, and valuation changes to maintain real-time platform accuracy.</li>
+          <li>Identified and implemented process improvements across the research workflow, reducing turnaround time and raising output quality benchmarks.</li>
+        </ul>
+        <div class="exp-divider">Team Leadership &amp; Knowledge Transfer</div>
+        <ul class="exp-list">
+          <li>Directly manage and mentor a team of 6–8 research analysts, setting clear performance expectations, conducting feedback sessions, and reporting progress to senior management.</li>
+          <li>Lead the full onboarding cycle for new researchers — designing structured walkthroughs, process documentation, and quality assurance frameworks that accelerate ramp-up time.</li>
+          <li>Build and maintain a centralised knowledge base of research methodologies, data standards, and quality guides to support continuous capability development across the team.</li>
+          <li>Act as the primary escalation point during high-volume periods, proactively resolving workflow bottlenecks to keep the team on track against productivity and quality targets.</li>
+          <li>Drive a culture of peer learning and cross-team knowledge exchange, improving team cohesion and output consistency.</li>
+          <li>Partner with team leads to identify skill gaps and design targeted learning interventions, contributing to measurable improvements in analyst performance and retention.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-card reveal">
+      <div>
+        <div class="exp-date">June 2022 — July 2023</div>
+        <div class="exp-co">PitchBook · Morningstar</div>
+        <div class="exp-loc">Navi Mumbai, India</div>
+      </div>
+      <div>
+        <h3 class="exp-title">Data Analyst</h3>
+        <p class="exp-subrole">VC &amp; M&amp;A Research — Private Company Coverage</p>
+        <ul class="exp-list">
+          <li>Conducted in-depth research on VC and M&amp;A-backed private companies across global markets, aggregating and validating structured financial data from regulatory filings, press releases, and direct primary sources.</li>
+          <li>Delivered accurate company valuations, deal-level investment data, and competitive intelligence supporting the PitchBook platform's private market database.</li>
+          <li>Monitored ongoing corporate actions including funding rounds, board changes, M&amp;A transactions, and restructuring events, ensuring records remained current and complete.</li>
+          <li>Built and maintained direct relationships with company founders, CFOs, and investor relations contacts, enhancing data quality and coverage depth.</li>
+          <li>Participated actively in process optimisation initiatives, contributing ideas and testing workflows that improved team efficiency and output standards.</li>
+          <li>Collaborated with senior analysts on complex deal research, developing strong knowledge of deal structuring, cap table mechanics, and VC/PE transaction dynamics.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-card reveal">
+      <div>
+        <div class="exp-date">June 2020 — June 2022</div>
+        <div class="exp-co">Sharekhan · Mirae Asset</div>
+        <div class="exp-loc">Mumbai, India</div>
+      </div>
+      <div>
+        <h3 class="exp-title">Equity Advisor &amp; Relationship Manager</h3>
+        <p class="exp-subrole">Client Portfolio Management &amp; Advisory Services</p>
+        <ul class="exp-list">
+          <li>Managed a diverse client portfolio spanning equity, mutual funds, derivatives, and other financial instruments, aligning investment strategies with individual risk profiles and financial goals.</li>
+          <li>Conducted fundamental and technical analysis across sectors to identify investment opportunities and generate actionable buy/sell recommendations.</li>
+          <li>Monitored live market movements, corporate events, and macroeconomic indicators to provide clients with timely portfolio guidance and rebalancing recommendations.</li>
+          <li>Ensured full regulatory compliance across trade execution processes, maintaining accurate documentation in line with SEBI guidelines and internal audit standards.</li>
+          <li>Delivered regular portfolio performance reviews and market outlook presentations, building long-term client trust and improving retention through proactive service.</li>
+          <li>Supported end-to-end client onboarding, KYC processes, and account setup, ensuring a smooth and professional client experience from day one.</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══ 03 PROJECTS ═══ -->
+<section class="projects section" id="projects">
+  <div class="s-inner">
+    <div class="s-num reveal">03 Key Projects</div>
+    <div class="proj-grid reveal">
+
+      <div class="proj-card">
+        <div class="proj-num">01 / 03</div>
+        <h3 class="proj-title">BDC Investment Tracking</h3>
+        <div class="proj-tag-row">
+          <span class="proj-tag">Data Integrity</span>
+          <span class="proj-tag">Investment Research</span>
+        </div>
+        <p class="proj-body">Served as an early contributor to a new Business Development Company research initiative at Morningstar. Analyzed and categorised BDC investment portfolios against defined data standards, improving classification accuracy and downstream reporting integrity. Developed operational guidelines and ran validation checks that formed the foundation for the team's ongoing BDC coverage.</p>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-num">02 / 03</div>
+        <h3 class="proj-title">Private &amp; Public Market Collaboration</h3>
+        <div class="proj-tag-row">
+          <span class="proj-tag">Cross-Functional</span>
+          <span class="proj-tag">Financial Analysis</span>
+        </div>
+        <p class="proj-body">Collaborated across Morningstar's private and public market research functions to standardise financial data collection and reporting. Extracted, validated, and maintained Normalized Profit Metrics (NPM) for company profiles, ensuring accuracy and compliance with established methodology. Contributed to bridging data gaps between private and public coverage teams.</p>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-num">03 / 03</div>
+        <h3 class="proj-title">Debt Team Collaboration Initiative</h3>
+        <div class="proj-tag-row">
+          <span class="proj-tag">Research Alignment</span>
+          <span class="proj-tag">Pipeline Integrity</span>
+        </div>
+        <p class="proj-body">Partnered with the Debt Research Team to build shared understanding of debt investment tracking methodologies, instruments, and transaction lifecycles. Documented unified data collection and validation procedures that aligned methodology across equity and debt investment segments, strengthening the overall consistency and reliability of PitchBook's research output.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 04 COVERAGE ═══ -->
+<section class="coverage section" id="coverage">
+  <div class="s-inner">
+    <div class="s-num reveal">04 Global Market Coverage</div>
+    <div class="map-section reveal">
+      <div class="map-top">
+        <div class="map-stat">
+          <div class="map-stat-num">17</div>
+          <div class="map-stat-label">Markets Covered</div>
+        </div>
+        <div class="map-stat">
+          <div class="map-stat-num">1,500<sup>+</sup></div>
+          <div class="map-stat-label">New Company Profiles</div>
+        </div>
+        <div class="map-stat">
+          <div class="map-stat-num">2,100<sup>+</sup></div>
+          <div class="map-stat-label">Close Loop Profiles</div>
+        </div>
+        <div class="map-stat">
+          <div class="map-stat-num">1,350<sup>+</sup></div>
+          <div class="map-stat-label">New Rounds Tracked</div>
+        </div>
+      </div>
+
+      <div class="map-svg-wrap">
+        <svg viewBox="0 0 1000 500" xmlns="http://www.w3.org/2000/svg">
+          <rect width="1000" height="500" fill="var(--bg2)"/>
+          <!-- simplified continents -->
+          <g fill="var(--panel)" stroke="var(--bdr2)" stroke-width="0.6">
+            <!-- North America -->
+            <path d="M70,90 L190,80 L230,110 L235,150 L210,170 L220,200 L195,230 L160,250 L130,240 L100,210 L80,180 L60,150 L50,120 Z"/>
+            <!-- South America -->
+            <path d="M195,260 L240,255 L260,290 L255,340 L240,400 L215,440 L195,420 L185,370 L180,320 L185,280 Z"/>
+            <!-- Europe -->
+            <path d="M450,95 L520,90 L545,115 L540,150 L515,170 L480,175 L455,160 L440,130 Z"/>
+            <!-- Africa -->
+            <path d="M455,180 L530,178 L555,220 L560,280 L540,340 L505,375 L470,360 L450,310 L440,250 L445,210 Z"/>
+            <!-- Asia -->
+            <path d="M545,80 L650,70 L730,90 L780,130 L800,170 L770,210 L720,225 L660,210 L610,195 L565,170 L545,130 Z"/>
+            <!-- South Asia/India -->
+            <path d="M580,190 L630,185 L650,225 L630,265 L600,260 L585,225 Z"/>
+            <!-- SE Asia -->
+            <path d="M650,230 L710,235 L730,270 L700,290 L665,275 L650,250 Z"/>
+            <!-- Japan -->
+            <path d="M790,150 L805,145 L815,175 L805,205 L795,195 L790,170 Z"/>
+            <!-- Australia -->
+            <path d="M730,330 L810,325 L835,360 L820,400 L765,405 L730,375 Z"/>
+          </g>
+
+          <!-- connecting lines from coverage to subtle grid -->
+          <g stroke="var(--bdr)" stroke-width="0.4" opacity="0.5">
+            <line x1="0" y1="125" x2="1000" y2="125"/>
+            <line x1="0" y1="250" x2="1000" y2="250"/>
+            <line x1="0" y1="375" x2="1000" y2="375"/>
+            <line x1="250" y1="0" x2="250" y2="500"/>
+            <line x1="500" y1="0" x2="500" y2="500"/>
+            <line x1="750" y1="0" x2="750" y2="500"/>
+          </g>
+
+          <!-- market dots -->
+          <!-- UK -->
+          <circle class="map-dot-pulse" cx="448" cy="108" r="10"/>
+          <circle class="map-dot" cx="448" cy="108" r="4"/>
+          <!-- France -->
+          <circle class="map-dot-pulse" cx="460" cy="130" r="10"/>
+          <circle class="map-dot" cx="460" cy="130" r="4"/>
+          <!-- Germany -->
+          <circle class="map-dot-pulse" cx="478" cy="118" r="10"/>
+          <circle class="map-dot" cx="478" cy="118" r="4"/>
+          <!-- Switzerland -->
+          <circle class="map-dot-pulse" cx="470" cy="135" r="10"/>
+          <circle class="map-dot" cx="470" cy="135" r="4"/>
+          <!-- Sweden -->
+          <circle class="map-dot-pulse" cx="490" cy="80" r="10"/>
+          <circle class="map-dot" cx="490" cy="80" r="4"/>
+          <!-- Norway -->
+          <circle class="map-dot-pulse" cx="475" cy="72" r="10"/>
+          <circle class="map-dot" cx="475" cy="72" r="4"/>
+          <!-- Denmark -->
+          <circle class="map-dot-pulse" cx="482" cy="100" r="10"/>
+          <circle class="map-dot" cx="482" cy="100" r="4"/>
+          <!-- Italy -->
+          <circle class="map-dot-pulse" cx="490" cy="150" r="10"/>
+          <circle class="map-dot" cx="490" cy="150" r="4"/>
+          <!-- UAE -->
+          <circle class="map-dot-pulse" cx="600" cy="195" r="10"/>
+          <circle class="map-dot" cx="600" cy="195" r="4"/>
+          <!-- India -->
+          <circle class="map-dot-pulse" cx="615" cy="220" r="10"/>
+          <circle class="map-dot" cx="615" cy="220" r="4"/>
+          <!-- Singapore -->
+          <circle class="map-dot-pulse" cx="680" cy="262" r="10"/>
+          <circle class="map-dot" cx="680" cy="262" r="4"/>
+          <!-- South Korea -->
+          <circle class="map-dot-pulse" cx="775" cy="148" r="10"/>
+          <circle class="map-dot" cx="775" cy="148" r="4"/>
+          <!-- Japan -->
+          <circle class="map-dot-pulse" cx="800" cy="165" r="10"/>
+          <circle class="map-dot" cx="800" cy="165" r="4"/>
+          <!-- Australia -->
+          <circle class="map-dot-pulse" cx="775" cy="365" r="10"/>
+          <circle class="map-dot" cx="775" cy="365" r="4"/>
+          <!-- Canada -->
+          <circle class="map-dot-pulse" cx="150" cy="100" r="10"/>
+          <circle class="map-dot" cx="150" cy="100" r="4"/>
+          <!-- North America (USA) -->
+          <circle class="map-dot-pulse" cx="140" cy="170" r="10"/>
+          <circle class="map-dot" cx="140" cy="170" r="4"/>
+          <!-- South America -->
+          <circle class="map-dot-pulse" cx="210" cy="330" r="10"/>
+          <circle class="map-dot" cx="210" cy="330" r="4"/>
+        </svg>
+      </div>
+
+      <div class="markets-footer">
+        <span class="market-item">UK</span>
+        <span class="market-item">France</span>
+        <span class="market-item">Germany</span>
+        <span class="market-item">Switzerland</span>
+        <span class="market-item">Sweden</span>
+        <span class="market-item">Norway</span>
+        <span class="market-item">Denmark</span>
+        <span class="market-item">Italy</span>
+        <span class="market-item">UAE</span>
+        <span class="market-item">India</span>
+        <span class="market-item">Singapore</span>
+        <span class="market-item">South Korea</span>
+        <span class="market-item">Japan</span>
+        <span class="market-item">Australia</span>
+        <span class="market-item">Canada</span>
+        <span class="market-item">North America</span>
+        <span class="market-item">South America</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 05 SKILLS ═══ -->
+<section class="skills section" id="skills">
+  <div class="s-inner">
+    <div class="s-num reveal">05 Skills</div>
+    <div class="skills-grid reveal">
+      <div class="sg">
+        <div class="sg-label">Domain</div>
+        <div class="tags">
+          <span class="tag">Private Markets</span>
+          <span class="tag">Venture Capital</span>
+          <span class="tag">M&amp;A Research</span>
+          <span class="tag">Funding Rounds</span>
+          <span class="tag">Company Profiling</span>
+          <span class="tag">Ownership Structures</span>
+          <span class="tag">Valuation Intelligence</span>
+          <span class="tag">Due Diligence</span>
+          <span class="tag">Deal Review</span>
+          <span class="tag">Cap Table Analysis</span>
+          <span class="tag">Corporate Actions</span>
+        </div>
+      </div>
+      <div class="sg">
+        <div class="sg-label">Platforms &amp; Tools</div>
+        <div class="tags">
+          <span class="tag">PitchBook Platform</span>
+          <span class="tag">MS Excel (Advanced)</span>
+          <span class="tag">MS Office Suite</span>
+          <span class="tag">Financial Modelling</span>
+          <span class="tag">Valuation Models</span>
+          <span class="tag">Bloomberg (Familiarity)</span>
+        </div>
+      </div>
+      <div class="sg">
+        <div class="sg-label">Analytical &amp; People</div>
+        <div class="tags">
+          <span class="tag">Financial Data Validation</span>
+          <span class="tag">Primary Research</span>
+          <span class="tag">Secondary Research</span>
+          <span class="tag">Normalized Profit Metrics</span>
+          <span class="tag">Stakeholder Comms</span>
+          <span class="tag">Team Management (6–8)</span>
+          <span class="tag">Training &amp; Mentoring</span>
+          <span class="tag">Performance Management</span>
+          <span class="tag">Knowledge Transfer</span>
+          <span class="tag">Floor Support</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 06 CERTIFICATIONS ═══ -->
+<section class="certifications section" id="certifications">
+  <div class="s-inner">
+    <div class="s-num reveal">06 Certifications</div>
+    <div class="cert-grid reveal">
+      <div class="cert-card">
+        <div class="cert-ico">CFA</div>
+        <span class="cert-nm">CFA Level 1 Cleared — Level II Candidate</span>
+      </div>
+      <div class="cert-card">
+        <div class="cert-ico">FM</div>
+        <span class="cert-nm">Financial Modelling &amp; Valuations</span>
+      </div>
+      <div class="cert-card">
+        <div class="cert-ico">5B</div>
+        <span class="cert-nm">NISM Series 5B — Mutual Fund Distributors</span>
+      </div>
+      <div class="cert-card">
+        <div class="cert-ico">S8</div>
+        <span class="cert-nm">NISM Series 8 — Equity Derivatives</span>
+      </div>
+      <div class="cert-card">
+        <div class="cert-ico">S7</div>
+        <span class="cert-nm">NISM Series 7 — Securities Operations &amp; Risk Management</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 07 EDUCATION ═══ -->
+<section class="education section" id="education">
+  <div class="s-inner">
+    <div class="s-num reveal">07 Education</div>
+    <div class="edu-list reveal">
+      <div class="edu-row">
+        <div class="edu-yr">2018 – 2020</div>
+        <div>
+          <div class="edu-deg">Bachelor of Financial Market</div>
+          <div class="edu-sch">K.J. Somaiya College, Mumbai</div>
+        </div>
+      </div>
+      <div class="edu-row">
+        <div class="edu-yr">2016 – 2017</div>
+        <div>
+          <div class="edu-deg">Higher Secondary Certificate (HSC)</div>
+          <div class="edu-sch">Mulund College of Commerce</div>
+        </div>
+      </div>
+      <div class="edu-row">
+        <div class="edu-yr">2014</div>
+        <div>
+          <div class="edu-deg">Secondary School Certificate (SSC)</div>
+          <div class="edu-sch">Indian Army School</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CONTACT ═══ -->
+<section class="contact" id="contact">
+  <div class="contact-inner">
+    <div class="s-num reveal">Get in Touch</div>
+    <div class="contact-grid">
+      <div class="reveal">
+        <p class="contact-big">Let's talk about <em>your next hire</em> in financial intelligence.</p>
+        <p class="contact-p">Whether you're looking for a senior research analyst, a team lead, or a financial data specialist with hands-on VC and M&amp;A experience — I'd love to connect.</p>
+      </div>
+      <div class="clinks reveal">
+        <a href="mailto:mahesh.shirsath27@gmail.com" class="clink">
+          <div class="clink-ico">✉</div>
+          <div>
+            <span class="clink-lbl">Email</span>
+            <span class="clink-val">mahesh.shirsath27@gmail.com</span>
+          </div>
+        </a>
+        <a href="tel:+918976762727" class="clink">
+          <div class="clink-ico">☎</div>
+          <div>
+            <span class="clink-lbl">Phone</span>
+            <span class="clink-val">+91 89767 62727</span>
+          </div>
+        </a>
+        <a href="https://linkedin.com/in/mahesh-shirsat-2b7571227" target="_blank" rel="noopener noreferrer" class="clink">
+          <div class="clink-ico">in</div>
+          <div>
+            <span class="clink-lbl">LinkedIn</span>
+            <span class="clink-val">mahesh-shirsat-2b7571227</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="f-l">© 2026 · Mahesh Shirsat · Mumbai</span>
+  <span class="f-r">Senior Data Analyst · PitchBook · Morningstar</span>
+</footer>
+
+<script>
+/* theme */
+function toggleTheme(){
+  const html=document.documentElement;
+  const next=html.getAttribute('data-theme')==='dark'?'light':'dark';
+  html.setAttribute('data-theme',next);
+  document.getElementById('toggleLabel').textContent=next==='dark'?'Dark':'Light';
+  localStorage.setItem('theme',next);
+}
+(function(){
+  const saved=localStorage.getItem('theme');
+  if(saved){
+    document.documentElement.setAttribute('data-theme',saved);
+    document.getElementById('toggleLabel').textContent=saved==='dark'?'Dark':'Light';
+  }
+})();
+
+/* hamburger */
+function toggleMenu(){
+  document.getElementById('hamburger').classList.toggle('open');
+  document.getElementById('mobileMenu').classList.toggle('open');
+}
+function closeMenu(){
+  document.getElementById('hamburger').classList.remove('open');
+  document.getElementById('mobileMenu').classList.remove('open');
+}
+document.addEventListener('click',function(e){
+  const menu=document.getElementById('mobileMenu');
+  const btn=document.getElementById('hamburger');
+  if(menu.classList.contains('open')&&!menu.contains(e.target)&&!btn.contains(e.target)) closeMenu();
+});
+
+/* reveal */
+const io=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+},{threshold:0.08,rootMargin:'0px 0px -30px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
